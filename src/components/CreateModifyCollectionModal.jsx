@@ -26,7 +26,7 @@ const CreateModifyCollectionModal = ({ onSuccess, onError, modify, collection })
         onSuccess: () => {
             onSuccess()
             queryClient.invalidateQueries({
-                queryKey: ["collections"],
+                queryKey: modify ? ["collections", collection.id] : ["collections"],
             })
         },
         onError: (err) => {
