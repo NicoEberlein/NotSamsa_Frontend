@@ -16,12 +16,15 @@ import CreateModifyCollectionModal from './CreateModifyCollectionModal.jsx';
 import CollectionCard from '../components/CollectionCard';
 import performRequest from "../performRequest.js";
 import {useNavigate} from "react-router-dom";
+import PageFooter from "./PageFooter.jsx";
 
 const { Content } = Layout;
 const { Title, Text } = Typography;
 const { useBreakpoint } = Grid;
 
 const CollectionsView = () => {
+
+    const [currentPage, setCurrentPage] = useState(1);
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const navigate = useNavigate();
@@ -31,15 +34,15 @@ const CollectionsView = () => {
     const queryClient = useQueryClient();
 
     const {
-        data,
+        data: data,
         isLoading: isLoadingCollections,
         isError: isErrorCollections,
         error: collectionsError,
     } = useQuery({
-        queryKey: ['collections'],
+        queryKey: ['collections', currentPage],
         queryFn: async ({ signal }) => {
             return performRequest({
-                url: "http://localhost:8080/collections",
+                url: `http://localhost:8080/collections?page=${currentPage}`,
                 method: "GET",
                 appendAuthorization: true,
                 signal: signal,
@@ -148,6 +151,7 @@ const CollectionsView = () => {
                         )}
                     </Row>
                 )}
+                { !isLoadingCollections && !isErrorCollections && data.pageDetails.totalPages > 1 && <PageFooter pages={data.pageDetails.totalPages} currentPage={currentPage} setCurrentPage={setCurrentPage}></PageFooter>}
             </Content>
 
             <Modal
