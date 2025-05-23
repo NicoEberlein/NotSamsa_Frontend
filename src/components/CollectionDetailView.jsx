@@ -294,13 +294,13 @@ const CollectionDetailView = () => {
                                                 onClick={() => {
                                                     deleteMutation.mutate({imageId: item.id, collectionId: collectionId})
                                                 }}>Delete</Button>
-                                                <Button
+                                                { collection.owner && <Button
                                                     onClick={() => {
                                                         setAsPreviewImageMutation.mutate({imageId: item.id, collectionId: collectionId})
                                                     }}
                                                     icon={<UploadOutlined/>}>
                                                     Set as preview image
-                                                </Button>
+                                                </Button>}
                                             </Card>
                                         </List.Item>
                                     )}
@@ -337,7 +337,7 @@ const CollectionDetailView = () => {
                                     footer={<PageFooter
                                         pages={participants.pageDetails.totalPages}
                                         currentPage={currentParticipantsPage}
-                                        setCurrentPage={setCurrentParticipantsPage()}>
+                                        setCurrentPage={setCurrentParticipantsPage}>
                                     </PageFooter>}
                                     dataSource={participants.items}
                                     renderItem={item => (
@@ -385,7 +385,12 @@ const CollectionDetailView = () => {
             width={600}
         >
             <AddParticipantModal
-                onSuccess={closeModal(setIsParticipantModalVisible)}
+                onSuccess={() => {
+                    queryClient.invalidateQueries({
+                        queryKey: ['collection', collectionId, 'participants', currentParticipantsPage]
+                    })
+                    closeModal(setIsParticipantModalVisible)}
+                }
                 onError={closeModal(setIsParticipantModalVisible)}
                 collectionId={collection.id}></AddParticipantModal>
         </Modal>
