@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link, useParams} from 'react-router-dom';
 import {
     Layout,
@@ -24,11 +24,23 @@ import performRequest from "../performRequest.js";
 import UploadImageModal from "./UploadImageModal.jsx";
 import AddParticipantModal from "./AddParticipantModal.jsx";
 import PageFooter from "./PageFooter.jsx";
+import log from "loglevel";
 
 const { Content } = Layout;
 const { Title, Text } = Typography;
 
 const CollectionDetailView = () => {
+
+    useEffect(() => {
+        log.info("Mounted CollectionDetailView");
+
+        return () => {
+            log.info("Unmounted CollectionDetailView");
+        }
+    }, [])
+
+    const { darkMode } = useTheme();
+
     const { collectionId } = useParams();
 
     const [isUploadModalVisible, setIsUploadModalVisible] = useState(false);

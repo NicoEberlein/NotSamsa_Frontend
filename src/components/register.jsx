@@ -1,13 +1,22 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Input, Button, Card, Typography, Space, Alert, message} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {useMutation} from "@tanstack/react-query";
 import performRequest from "../performRequest.js";
 import {useNavigate} from "react-router";
+import log from "loglevel";
 
 const { Title, Link } = Typography;
 
 const RegisterPage = () => {
+
+    useEffect(() => {
+        log.info("Mounted register")
+
+        return () => {
+            log.info("Unmounted register")
+        }
+    }, [])
 
     const navigate = useNavigate()
 

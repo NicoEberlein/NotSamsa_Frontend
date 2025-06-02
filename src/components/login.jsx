@@ -1,13 +1,22 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Input, Button, Card, Typography, Space, Alert} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {useMutation} from "@tanstack/react-query";
 import performRequest from "../performRequest.js";
 import {useNavigate} from "react-router-dom";
+import log from "loglevel";
 
 const { Title, Link } = Typography;
 
 const LoginPage = () => {
+
+    useEffect(() => {
+        log.info("Mounted login")
+
+        return () => {
+            log.info("Unmounted login")
+        }
+    }, [])
 
     const navigate = useNavigate()
 

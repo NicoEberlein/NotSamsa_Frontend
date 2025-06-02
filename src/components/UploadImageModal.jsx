@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, message, Typography, Upload} from 'antd';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import { UploadOutlined } from "@ant-design/icons";
+import log from "loglevel";
 
 const { Text } = Typography;
 
 const UploadImageModal = ({ onSuccess, onError, collectionId }) => {
+
+    useEffect(() => {
+        log.info("Mounted UploadImageModal");
+
+        return () => {
+            log.info("Unmounted UploadImageModal");
+        }
+    }, [])
 
     const queryClient = useQueryClient();
 

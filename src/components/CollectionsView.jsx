@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Layout,
     Row,
@@ -17,12 +17,24 @@ import CollectionCard from '../components/CollectionCard';
 import performRequest from "../performRequest.js";
 import {useNavigate} from "react-router-dom";
 import PageFooter from "./PageFooter.jsx";
+import log from "loglevel";
 
 const { Content } = Layout;
 const { Title, Text } = Typography;
 const { useBreakpoint } = Grid;
 
 const CollectionsView = () => {
+
+    useEffect(() => {
+        log.info("Mounted CollectionsView")
+
+        return () => {
+            log.info("Unmounted CollectionsView")
+        }
+    }, [])
+
+    const { toggleTheme, darkMode } = useTheme();
+    const [loggingLevel, setLoggingLevel] = useState(log.levels.WARN);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -103,6 +115,19 @@ const CollectionsView = () => {
                             onClick={handleShowModal(setIsModalVisible)}
                             title="Create new collection"
                         />
+                    </Col>
+                    <Col>
+                        <Button onClick={() => {
+                            toggleTheme()
+                        }}>{ darkMode ? "Light" : "Dark"}</Button>
+                    </Col>
+                    <Col>
+                        <Button color={log.getLevel() === log.levels.WARN ? "error" : "success"} onClick={() => {
+                            const newLevel = log.getLevel() === log.levels.WARN ? log.levels.INFO : log.levels.WARN
+                            log.setLevel(newLevel);
+                            setLoggingLevel(newLevel)
+                            console.log("Set to", loggingLevel)
+                        }}>{ log.getLevel() === log.levels.WARN ? "Info" : "Warn"}</Button>
                     </Col>
                     <Col>
                         <Button

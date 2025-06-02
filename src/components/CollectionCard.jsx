@@ -1,6 +1,5 @@
-// src/components/CollectionCard.jsx
-import React, {useState} from 'react';
-import {Card, Typography, Space, Button, Modal, message} from 'antd';
+import React, {useEffect, useState} from 'react';
+import {Card, Typography, Button, Modal, message} from 'antd';
 import {
     PictureOutlined,
     UserOutlined,
@@ -12,11 +11,20 @@ import {useMutation, useQueryClient} from "@tanstack/react-query";
 import performRequest from "../performRequest.js";
 import {useNavigate} from "react-router-dom";
 import CreateModifyCollectionModal from "./CreateModifyCollectionModal.jsx"; // Icons
+import log from "loglevel"; // Icons
 
 const { Title, Text } = Typography;
 const { confirm } = Modal
 
 const CollectionCard = ({ collection }) => {
+
+    useEffect(() => {
+        log.info("Mounted CollectionCard");
+
+        return () => {
+            log.info("Unmounted CollectionCard")
+        }
+    }, [])
 
     const navigate = useNavigate()
 

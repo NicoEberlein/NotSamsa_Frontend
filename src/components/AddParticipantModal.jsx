@@ -3,10 +3,19 @@ import {Button, Input, message, Typography, Upload} from 'antd';
 import { useMutation } from '@tanstack/react-query';
 import {PlusOutlined, UploadOutlined} from "@ant-design/icons";
 import performRequest from "../performRequest.js";
+import log from "loglevel";
 
 const { Text } = Typography;
 
-const UploadImageModal = ({ onSuccess, onError, collectionId }) => {
+const AddParticipantModal = ({ onSuccess, onError, collectionId }) => {
+
+    useEffect(() => {
+        log.info("Mounted AddParticipantModal");
+
+        return () => {
+            log.info("Unmounted AddParticipantModal");
+        }
+    }, [])
 
     const [participant, setParticipant] = useState("");
 

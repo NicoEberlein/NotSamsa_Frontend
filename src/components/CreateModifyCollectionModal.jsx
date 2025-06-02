@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { Form, Input, Button, Typography } from 'antd';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import performRequest from "../performRequest.js";
+import log from "loglevel";
 
 const { Text } = Typography;
 
 const CreateModifyCollectionModal = ({ onSuccess, onError, modify, collection }) => {
+
+    useEffect(() => {
+        log.info("Mounted CreateModifyCollectionModal");
+
+        return () => {
+            log.info("Unmounted CreateModifyCollectionModal");
+        }
+    }, [])
 
     const [description, setDescription] = useState(modify ? collection.description : '');
     const [name, setName] = useState(modify ? collection.name : '');

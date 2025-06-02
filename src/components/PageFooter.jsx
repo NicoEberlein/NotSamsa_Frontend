@@ -1,6 +1,16 @@
-import {Button, message, Space} from "antd";
+import {Button, Space} from "antd";
+import {useEffect} from "react";
+import log from "loglevel";
 
 const PageFooter = (props) => {
+
+    useEffect(() => {
+        log.info("Mounted PageFooter")
+
+        return () => {
+            log.info("Unmounted PageFooter")
+        }
+    }, [])
 
     const { pages, currentPage, setCurrentPage } = props
 
