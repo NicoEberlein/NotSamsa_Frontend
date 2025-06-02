@@ -1,4 +1,4 @@
-import {createContext, useContext, useEffect, useState} from "react";
+import {createContext, useContext, useEffect, useMemo, useState} from "react";
 import {useQuery} from "@tanstack/react-query";
 import performRequest from "../performRequest.js";
 
@@ -55,11 +55,11 @@ export const AuthProvider = ({ children }) => {
         }
     }, [isUserQueryLoading, isUserQuerySuccess, isUserQueryError, userData, userError]);
 
-    const authValue = {
+    const authValue = useMemo(() => ({
         isAuthenticated,
         user,
         isAuthLoading
-    }
+    }), [isAuthenticated, user, isAuthLoading]);
 
     return (
         <AuthContext.Provider value={authValue}>
