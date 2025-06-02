@@ -10,19 +10,23 @@ import {
     Modal,
     Grid, notification
 } from 'antd';
-import {LogoutOutlined, PlusOutlined} from '@ant-design/icons'; // Nur noch PlusOutlined benötigt
+import {LogoutOutlined, PlusOutlined} from '@ant-design/icons';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import CreateModifyCollectionModal from './CreateModifyCollectionModal.jsx';
 import CollectionCard from '../components/CollectionCard';
 import performRequest from "../performRequest.js";
 import {useNavigate} from "react-router-dom";
 import PageFooter from "./PageFooter.jsx";
+import {useTheme} from "../contexts/ThemeContext.jsx";
+
 
 const { Content } = Layout;
 const { Title, Text } = Typography;
 const { useBreakpoint } = Grid;
 
 const CollectionsView = () => {
+
+    const { darkMode } = useTheme();
 
     const [currentPage, setCurrentPage] = useState(1);
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -88,7 +92,7 @@ const CollectionsView = () => {
     return (
         <Layout style={{ minHeight: '100vh' }}>
 
-            <Content style={{ padding: '24px', backgroundColor: '#f0f2f5' }}>
+            <Content style={{ padding: '24px', backgroundColor: darkMode ? '#333333':'#f0f2f5' }}>
 
                 <Row justify="space-between" align="middle" style={{ marginBottom: 24 }}>
                     <Col>

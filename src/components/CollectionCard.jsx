@@ -1,17 +1,14 @@
-// src/components/CollectionCard.jsx
 import React, {useState} from 'react';
-import {Card, Typography, Space, Button, Modal, message} from 'antd';
+import {Card, Typography, Button, Modal, message} from 'antd';
 import {
     PictureOutlined,
-    UserOutlined,
-    CompassOutlined,
     ExclamationCircleOutlined,
     DeleteOutlined
 } from '@ant-design/icons';
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import performRequest from "../performRequest.js";
 import {useNavigate} from "react-router-dom";
-import CreateModifyCollectionModal from "./CreateModifyCollectionModal.jsx"; // Icons
+import CreateModifyCollectionModal from "./CreateModifyCollectionModal.jsx";
 
 const { Title, Text } = Typography;
 const { confirm } = Modal
