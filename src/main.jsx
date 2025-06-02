@@ -12,6 +12,8 @@ import {AuthProvider} from "./contexts/AuthContext.jsx";
 import {ProtectedRoute} from "./components/ProtectedRoute.jsx";
 import CollectionsView from "./components/CollectionsView.jsx";
 import CollectionDetailView from "./components/CollectionDetailView.jsx";
+import {ThemeProvider, useTheme} from "./contexts/ThemeContext.jsx";
+import {ConfigProvider, theme} from "antd";
 
 const queryClient = new QueryClient();
 
