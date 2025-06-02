@@ -56,10 +56,10 @@ const LoginPage = () => {
         loginMutation.mutate({
             url: "http://localhost:8080/login",
             method: "POST",
-            headers: {
+            headers: new Headers({
                 "Content-Type": "application/json",
                 "Accept": "application/json",
-            },
+            }),
             body: {
                 mail: mail,
                 password: password,
