@@ -67,7 +67,7 @@ const CollectionCard = ({ collection }) => {
                 collection.previewImageUrl ? (
                     <img alt={collection.name || 'Collection Preview'} src={collection.previewImageUrl} style={{ height: 300, objectFit: 'cover' }} />
                 ) : (
-                    <div style={{ height: 200, backgroundColor: '#e0e0e0', display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#888' }}>
+                    <div style={{ height: 200, display: 'flex', justifyContent: 'center', alignItems: 'center', color: '#888' }}>
                         <PictureOutlined style={{ fontSize: 48 }} />
                         <Text style={{ marginLeft: 8 }}>No image</Text>
                     </div>

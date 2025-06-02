@@ -26,7 +26,7 @@ const { useBreakpoint } = Grid;
 
 const CollectionsView = () => {
 
-    const { darkMode } = useTheme();
+    const { toggleTheme, darkMode } = useTheme();
 
     const [currentPage, setCurrentPage] = useState(1);
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -107,6 +107,11 @@ const CollectionsView = () => {
                             onClick={handleShowModal(setIsModalVisible)}
                             title="Create new collection"
                         />
+                    </Col>
+                    <Col>
+                        <Button onClick={() => {
+                            toggleTheme()
+                        }}>{ darkMode ? "Light" : "Dark"}</Button>
                     </Col>
                     <Col>
                         <Button
