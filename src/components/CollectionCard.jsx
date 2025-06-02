@@ -2,15 +2,13 @@ import React, {useEffect, useState} from 'react';
 import {Card, Typography, Button, Modal, message} from 'antd';
 import {
     PictureOutlined,
-    UserOutlined,
-    CompassOutlined,
     ExclamationCircleOutlined,
     DeleteOutlined
 } from '@ant-design/icons';
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import performRequest from "../performRequest.js";
 import {useNavigate} from "react-router-dom";
-import CreateModifyCollectionModal from "./CreateModifyCollectionModal.jsx"; // Icons
+import CreateModifyCollectionModal from "./CreateModifyCollectionModal.jsx";
 import log from "loglevel"; // Icons
 
 const { Title, Text } = Typography;

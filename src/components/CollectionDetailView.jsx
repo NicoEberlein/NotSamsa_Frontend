@@ -25,6 +25,7 @@ import UploadImageModal from "./UploadImageModal.jsx";
 import AddParticipantModal from "./AddParticipantModal.jsx";
 import PageFooter from "./PageFooter.jsx";
 import log from "loglevel";
+import {useTheme} from "../contexts/ThemeContext.jsx";
 
 const { Content } = Layout;
 const { Title, Text } = Typography;
@@ -241,7 +242,7 @@ const CollectionDetailView = () => {
 
 
     return <>
-        <Layout style={{ minHeight: '100vh', backgroundColor: '#f0f2f5' }}>
+        <Layout style={{ minHeight: '100vh', backgroundColor: darkMode ? '#333333':'#f0f2f5' }}>
             <Content style={{ padding: '24px' }}>
 
                 {/* Header Section */}

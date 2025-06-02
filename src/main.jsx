@@ -43,11 +43,20 @@ const router = createBrowserRouter([
     }
 ])
 
+const AppContent = () => {
+    const { darkMode } = useTheme();
+    return <ConfigProvider theme={{algorithm: darkMode ? theme.darkAlgorithm : theme.defaultAlgorithm}}>
+        <RouterProvider router={router}></RouterProvider>
+    </ConfigProvider>
+}
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
       <QueryClientProvider client={queryClient}>
           <AuthProvider>
-            <RouterProvider router={router}></RouterProvider>
+              <ThemeProvider>
+                  <AppContent />
+              </ThemeProvider>
           </AuthProvider>
       </QueryClientProvider>
   </StrictMode>
