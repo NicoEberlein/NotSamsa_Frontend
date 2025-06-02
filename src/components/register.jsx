@@ -70,7 +70,8 @@ const RegisterPage = () => {
             body: {
                 mail: mail,
                 password: password,
-            }
+            },
+            parseResponse: "text"
         })
 
     }

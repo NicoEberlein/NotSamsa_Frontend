@@ -35,9 +35,10 @@ const CollectionCard = ({ collection }) => {
     const deleteMutation = useMutation({
         mutationFn: async () => {
             return performRequest({
-                url: `http://localhost:8080/collections/${collection.id}`,
+                url: `http://localhost:8080/collections/${collection["_id"]}`,
                 method: "DELETE",
                 appendAuthorization: true,
+                parseResponse: "text"
             })
         },
         onSuccess: () => {
@@ -66,7 +67,7 @@ const CollectionCard = ({ collection }) => {
             cancelText: 'Cancel',
             centered: true,
             onOk: () => {
-                deleteMutation.mutate(collection.id)
+                deleteMutation.mutate(collection["_id"])
             }
         })
     }
@@ -89,7 +90,7 @@ const CollectionCard = ({ collection }) => {
                  <Button
                      type="link"
                     onClick={() => {
-                        navigate(`/collections/${collection.id}`)
+                        navigate(`/collections/${collection["_id"]}`)
                     }}>Details</Button>,
                  <Button
                      type="text"

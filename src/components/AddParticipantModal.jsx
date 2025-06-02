@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Input, message, Typography, Upload} from 'antd';
-import { useMutation } from '@tanstack/react-query';
+import {useMutation} from '@tanstack/react-query';
 import {PlusOutlined, UploadOutlined} from "@ant-design/icons";
 import performRequest from "../performRequest.js";
 import log from "loglevel";
@@ -25,7 +25,8 @@ const AddParticipantModal = ({ onSuccess, onError, collectionId }) => {
                 url: `http://localhost:8080/collections/${collectionId}/participants`,
                 method: 'POST',
                 body: {userMails: userMails},
-                appendAuthorization: true
+                appendAuthorization: true,
+                parseResponse: "text"
             })
         },
         onSuccess: () => {

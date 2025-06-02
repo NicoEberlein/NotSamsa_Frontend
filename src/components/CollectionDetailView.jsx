@@ -88,7 +88,8 @@ const CollectionDetailView = () => {
             return performRequest({
                 url: `http://localhost:8080/collections/${collectionId}/participants/${participantId}`,
                 method: "DELETE",
-                appendAuthorization: true
+                appendAuthorization: true,
+                parseResponse: "text"
             })
         },
         onSuccess: () => {
@@ -108,6 +109,7 @@ const CollectionDetailView = () => {
                 url: `http://localhost:8080/collections/${collectionId}/images/${imageId}`,
                 method: 'DELETE',
                 appendAuthorization: true,
+                parseResponse: "text"
             })
         },
         onSuccess: () => {
@@ -130,7 +132,8 @@ const CollectionDetailView = () => {
                 appendAuthorization: true,
                 body: {
                     previewImageId: imageId
-                }
+                },
+                parseResponse: "text"
             })
         },
         onSuccess: () => {
@@ -299,16 +302,16 @@ const CollectionDetailView = () => {
                                             >
                                                 <Button icon={<DownloadOutlined/>}
                                                 onClick={() => {
-                                                    downloadMutation.mutate({imageId: item.id, collectionId: collectionId})
+                                                    downloadMutation.mutate({imageId: item["_id"], collectionId: collectionId})
                                                 }}>Download</Button>
                                                 <Button
                                                     icon={<DeleteOutlined/>}
                                                 onClick={() => {
-                                                    deleteMutation.mutate({imageId: item.id, collectionId: collectionId})
+                                                    deleteMutation.mutate({imageId: item["_id"], collectionId: collectionId})
                                                 }}>Delete</Button>
                                                 { collection.owner && <Button
                                                     onClick={() => {
-                                                        setAsPreviewImageMutation.mutate({imageId: item.id, collectionId: collectionId})
+                                                        setAsPreviewImageMutation.mutate({imageId: item["_id"], collectionId: collectionId})
                                                     }}
                                                     icon={<UploadOutlined/>}>
                                                     Set as preview image
@@ -353,7 +356,7 @@ const CollectionDetailView = () => {
                                     </PageFooter>}
                                     dataSource={participants.items}
                                     renderItem={item => (
-                                        <List.Item key={item.id || item.mail}>
+                                        <List.Item key={item["_id"] || item.mail}>
                                             <List.Item.Meta
                                                 title={item.mail}
                                             />
@@ -385,7 +388,7 @@ const CollectionDetailView = () => {
         <UploadImageModal
         onSuccess={closeModal(setIsUploadModalVisible)}
         onError={closeModal(setIsUploadModalVisible)}
-        collectionId={collection.id}></UploadImageModal>
+        collectionId={collection["_id"]}></UploadImageModal>
     </Modal>
 
         <Modal
@@ -404,7 +407,7 @@ const CollectionDetailView = () => {
                     closeModal(setIsParticipantModalVisible)}
                 }
                 onError={closeModal(setIsParticipantModalVisible)}
-                collectionId={collection.id}></AddParticipantModal>
+                collectionId={collection["_id"]}></AddParticipantModal>
         </Modal>
     </>
 };

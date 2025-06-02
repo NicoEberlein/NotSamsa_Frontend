@@ -26,7 +26,8 @@ const CreateModifyCollectionModal = ({ onSuccess, onError, modify, collection })
             url: modify ? `http://localhost:8080/collections/${collectionId}` : "http://localhost:8080/collections",
             method: modify ? "PATCH" : "POST",
             appendAuthorization: true,
-            body: body
+            body: body,
+            parseResponse: "text"
         })
     }
 
@@ -55,7 +56,7 @@ const CreateModifyCollectionModal = ({ onSuccess, onError, modify, collection })
                     createCollectionMutation.mutate({
                         body: {name: name, description: description},
                         modify: true,
-                        collectionId: collection.id,
+                        collectionId: collection["_id"],
                     })
                 }else {
                     createCollectionMutation.mutate({
