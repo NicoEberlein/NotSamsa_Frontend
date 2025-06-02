@@ -52,4 +52,4 @@ const AddParticipantModal = ({ onSuccess, onError, collectionId }) => {
     </>
 };
 
-export default UploadImageModal;
+export default AddParticipantModal;
